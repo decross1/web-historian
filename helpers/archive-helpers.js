@@ -10,9 +10,10 @@ var _ = require('underscore');
  */
 
 exports.paths = {
-  siteAssets: path.join(__dirname, '../web/public'),
-  archivedSites: path.join(__dirname, '../archives/sites'),
-  list: path.join(__dirname, '../archives/sites.txt')
+  staticFiles: path.join(__dirname, '../web/public'), //stores the static files
+  archivedSites: path.join(__dirname, '../archives/sites'), //stores archived files
+  list: path.join(__dirname, '../archives/sites.txt') //stores the urls that were archived
+
 };
 
 // Used for stubbing paths for tests, do not modify
@@ -22,20 +23,26 @@ exports.initialize = function(pathsObj) {
   });
 };
 
+
 // The following function names are provided to you to suggest how you might
 // modularize your code. Keep it clean!
 
 exports.readListOfUrls = function(callback) {
+//read current list of urls from paths.archivedSites
 };
 
 exports.isUrlInList = function(url, callback) {
+//check for value/url in list => boolean 
 };
 
 exports.addUrlToList = function(url, callback) {
+//add a value/url to list 
 };
 
 exports.isUrlArchived = function(url, callback) {
+//check to see if url is archived from paths.archivedSites => boolean
 };
 
 exports.downloadUrls = function(urls) {
+//download url from archivedSites
 };
