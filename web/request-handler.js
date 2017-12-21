@@ -13,7 +13,7 @@ var defaultCorsHeaders = {
 
 exports.handleRequest = function (req, res) {
   // console.log('inside handleRequest');
-  archive.downloadUrls(['www.google.com']);  
+  // archive.downloadUrls(['www.google.com']);  
   var headers = defaultCorsHeaders;
   if ( req.method === 'GET' && req.url === '/') {  
     

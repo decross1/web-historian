@@ -43,7 +43,6 @@ exports.isUrlInList = function(url, callback) {
 
 exports.addUrlToList = function(url, callback) {
 //add a value/url to list 
-  // let input = $('input').val();
   fs.writeFile(exports.paths.list, url, (err, data) => {
     if (err) { 
       throw err;
@@ -51,11 +50,6 @@ exports.addUrlToList = function(url, callback) {
       callback(data);
     }
   });
-  // let logUrl = fs.appendFile('sites.txt', function(err) {
-  //   if (err) { throw err; }
-  //   console.log('Saved to file');
-  // });
-  // logUrl.write('test data to save');
 };
 
 exports.isUrlArchived = function(url, callback) { 
@@ -66,30 +60,13 @@ exports.isUrlArchived = function(url, callback) {
 
 exports.downloadUrls = function(urls) {
 //download url from archivedSites
-  // first store the array
   var urlList = urls;
-  // loop over array
   for (var i = 0; i < urlList.length; i++) {  
     var url = urlList[i];                                                             
-    // call isUrlArchived on each url
     exports.isUrlArchived(url, function (exists) {
-    // if isUrlArchived != true
       if (!exists) {
-      // invoke download
-        exports.download(url, exports.paths.archivedSites); 
+        http.request('http://' + url).pipe(fs.createWriteStream(exports.paths.archivedSites + '/' + url));
       }
     });
   }
-  console.log(exports.paths.archivedSites);
-};
-
-
-exports.download = function (url, dest) {
-  var file = fs.createWriteStream(dest);
-  var request = http.get(url, (response) => {
-    response.pipe(file);
-    file.on('finish', () => {
-      file.close();
-    });
-  });
 };
