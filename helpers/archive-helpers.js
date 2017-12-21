@@ -59,8 +59,25 @@ exports.addUrlToList = function(url, callback) {
 
 exports.isUrlArchived = function(url, callback) {
 //check to see if url is archived from paths.archivedSites => boolean
+  var sitePath = path.join(exports.paths.archivedSites, url);
+
+  fs.exists(sitePath, (exists) => callback(exists));
 };
 
 exports.downloadUrls = function(urls) {
 //download url from archivedSites
+  var download = function(url) {
+    var webData;
+    http.get('http://' + url, function (res) {
+      res.on('data', function(chunk) {
+        webData = chunk;
+      });
+      res.on('end', () => fs.writeFile(exports.path.archivedSites + '/' + url, webData));
+    });
+  };
+
+  urls.forEach(function(url) {
+    console.log(url);
+    download(url);
+  });
 };
