@@ -14,6 +14,7 @@ var defaultCorsHeaders = {
 exports.handleRequest = function (req, res) {
   // console.log('inside handleRequest');
   archive.readListOfUrls();
+  archive.addUrlToList();
   var headers = defaultCorsHeaders;
   if ( req.method === 'GET' && req.url === '/') {  
     

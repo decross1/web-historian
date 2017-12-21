@@ -30,8 +30,8 @@ exports.initialize = function(pathsObj) {
 exports.readListOfUrls = function(callback) {
 //read current list of urls from paths.archivedSites
   fs.readFile(exports.paths.list, (err, data) => {
-    var urlArray = data.toString().split('\n');
-    console.log(urlArray);
+    var urls = data.toString().split('\n');
+    // console.log(urlArray);
   });
 
 };
@@ -42,6 +42,19 @@ exports.isUrlInList = function(url, callback) {
 
 exports.addUrlToList = function(url, callback) {
 //add a value/url to list 
+  // let input = $('input').val();
+  fs.writeFile(exports.paths.list, url, function(err) {
+    if (err) { 
+      throw err;
+    } else {
+      console.log('success');
+    }
+  });
+  // let logUrl = fs.appendFile('sites.txt', function(err) {
+  //   if (err) { throw err; }
+  //   console.log('Saved to file');
+  // });
+  // logUrl.write('test data to save');
 };
 
 exports.isUrlArchived = function(url, callback) {
