@@ -30,24 +30,27 @@ exports.initialize = function(pathsObj) {
 exports.readListOfUrls = function(callback) {
 //read current list of urls from paths.archivedSites
   fs.readFile(exports.paths.list, (err, data) => {
-    var urls = data.toString().split('\n');
-    // console.log(urlArray);
+    callback(data.toString().split('\n'));
   });
 
 };
 
 exports.isUrlInList = function(url, callback) {
 //check for value/url in list => boolean 
+  var urlList = exports.readListOfUrls(urls => urls.includes(url));
+  callback(urlList);
 };
 
 exports.addUrlToList = function(url, callback) {
 //add a value/url to list 
   // let input = $('input').val();
-  fs.writeFile(exports.paths.list, url, function(err) {
+  fs.writeFile(exports.paths.list, url, (err, data) => {
     if (err) { 
       throw err;
     } else {
-      console.log('success');
+      // console.log(data);
+      callback(data);
+      // console.log('success');
     }
   });
   // let logUrl = fs.appendFile('sites.txt', function(err) {
