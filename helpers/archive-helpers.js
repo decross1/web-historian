@@ -37,8 +37,7 @@ exports.readListOfUrls = function(callback) {
 
 exports.isUrlInList = function(url, callback) {
 //check for value/url in list => boolean 
-  var urlList = exports.readListOfUrls(urls => urls.includes(url));
-  callback(urlList);
+  var urlList = exports.readListOfUrls(urls => callback(urls.includes(url)));
 };
 
 exports.addUrlToList = function(url, callback) {
@@ -48,9 +47,7 @@ exports.addUrlToList = function(url, callback) {
     if (err) { 
       throw err;
     } else {
-      // console.log(data);
       callback(data);
-      // console.log('success');
     }
   });
   // let logUrl = fs.appendFile('sites.txt', function(err) {
