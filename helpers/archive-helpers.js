@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var _ = require('underscore');
+var http = require('http');
 
 /*
  * You will need to reuse the same paths many times over in the course of this sprint.
@@ -42,7 +43,6 @@ exports.isUrlInList = function(url, callback) {
 
 exports.addUrlToList = function(url, callback) {
 //add a value/url to list 
-  // let input = $('input').val();
   fs.writeFile(exports.paths.list, url, (err, data) => {
     if (err) { 
       throw err;
@@ -50,22 +50,21 @@ exports.addUrlToList = function(url, callback) {
       callback(data);
     }
   });
-  // let logUrl = fs.appendFile('sites.txt', function(err) {
-  //   if (err) { throw err; }
-  //   console.log('Saved to file');
-  // });
-  // logUrl.write('test data to save');
 };
 
-exports.isUrlArchived = function(url, callback) {
+exports.isUrlArchived = function(url, callback) { 
 //check to see if url is archived from paths.archivedSites => boolean
   var sitePath = path.join(exports.paths.archivedSites, url);
+<<<<<<< HEAD
 
+=======
+>>>>>>> abcdce337f2bae517d1929a59866be4cc6f01b59
   fs.exists(sitePath, (exists) => callback(exists));
 };
 
 exports.downloadUrls = function(urls) {
 //download url from archivedSites
+<<<<<<< HEAD
   var download = function(url) {
     var webData;
     http.get('http://' + url, function (res) {
@@ -80,4 +79,15 @@ exports.downloadUrls = function(urls) {
     console.log(url);
     download(url);
   });
+=======
+  var urlList = urls;
+  for (var i = 0; i < urlList.length; i++) {  
+    var url = urlList[i];                                                             
+    exports.isUrlArchived(url, function (exists) {
+      if (!exists) {
+        http.request('http://' + url).pipe(fs.createWriteStream(exports.paths.archivedSites + '/' + url));
+      }
+    });
+  }
+>>>>>>> abcdce337f2bae517d1929a59866be4cc6f01b59
 };
