@@ -55,16 +55,11 @@ exports.addUrlToList = function(url, callback) {
 exports.isUrlArchived = function(url, callback) { 
 //check to see if url is archived from paths.archivedSites => boolean
   var sitePath = path.join(exports.paths.archivedSites, url);
-<<<<<<< HEAD
-
-=======
->>>>>>> abcdce337f2bae517d1929a59866be4cc6f01b59
   fs.exists(sitePath, (exists) => callback(exists));
 };
 
 exports.downloadUrls = function(urls) {
 //download url from archivedSites
-<<<<<<< HEAD
   var download = function(url) {
     var webData;
     http.get('http://' + url, function (res) {
@@ -79,7 +74,7 @@ exports.downloadUrls = function(urls) {
     console.log(url);
     download(url);
   });
-=======
+
   var urlList = urls;
   for (var i = 0; i < urlList.length; i++) {  
     var url = urlList[i];                                                             
@@ -89,5 +84,4 @@ exports.downloadUrls = function(urls) {
       }
     });
   }
->>>>>>> abcdce337f2bae517d1929a59866be4cc6f01b59
 };
