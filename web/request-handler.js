@@ -13,7 +13,7 @@ var defaultCorsHeaders = {
 
 exports.handleRequest = function (req, res) {
   // console.log('inside handleRequest');
-
+  archive.readListOfUrls();
   var headers = defaultCorsHeaders;
   if ( req.method === 'GET' && req.url === '/') {  
     
@@ -32,13 +32,18 @@ exports.handleRequest = function (req, res) {
       res.write(data.toString());
       res.end();
     });
-  
-  } 
+
+  } else if (req.method === 'POST') {
+    // check to see if req.url is in archive
+    // if it is
+      // serve that site
+    
+  // } 
   // else if (req.method === 'GET' && req.url === '/www.google.com') {
   //   console.log('working');
   //   // fs.readFile(archive.paths);
   // } 
-  else {
+  } else {
     console.log('requested url', req.url);
     res.writeHead(404, headers);
     res.end('Error');

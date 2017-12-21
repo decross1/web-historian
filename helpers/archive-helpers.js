@@ -29,6 +29,11 @@ exports.initialize = function(pathsObj) {
 
 exports.readListOfUrls = function(callback) {
 //read current list of urls from paths.archivedSites
+  fs.readFile(exports.paths.list, (err, data) => {
+    var urlArray = data.toString().split('\n');
+    console.log(urlArray);
+  });
+
 };
 
 exports.isUrlInList = function(url, callback) {
